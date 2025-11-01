@@ -13,7 +13,8 @@
 	"plugins": [
 		"@typescript-eslint",
 		"roblox-ts",
-		"prettier"
+		"prettier",
+		"simple-import-sort"
 	],
 	"extends": [
 		"eslint:recommended",
@@ -22,6 +23,17 @@
 		"plugin:prettier/recommended"
 	],
 	"rules": {
-		"prettier/prettier": "warn"
-	}
+    	"prettier/prettier": "error",
+    	"simple-import-sort/imports": "error",
+    	"simple-import-sort/exports": "error",
+    	"@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+    	"@typescript-eslint/array-type": ["error", { "default": "generic" }],
+    	"@typescript-eslint/no-namespace": ["error", { "allowDeclarations": true }],
+    	"@typescript-eslint/no-empty-object-type": "off",
+    	"@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    	"roblox-ts/lua-truthiness": "off",
+    	"curly": ["error", "all"],
+    	"no-else-return": "error"
+  }
 }
+

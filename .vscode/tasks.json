@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Game",
+      "type": "shell",
+      "command": "npm run build:game",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Watch Game",
+      "type": "shell",
+      "command": "npm run watch:game",
+      "isBackground": true,
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Serve Game",
+      "type": "shell",
+      "command": "npm run serve:game",
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

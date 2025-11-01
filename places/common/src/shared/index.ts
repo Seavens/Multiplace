@@ -1,2 +1,2 @@
-export * from "./data";
-export * from "./sync";
+export * from './data';
+export * from './sync';
