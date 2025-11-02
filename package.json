@@ -10,13 +10,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@rbxts/compiler-types": "3.0.0-types.0",
     "@rbxts/types": "^1.0.888",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
-    "@typescript-eslint/parser": "^8.46.2",
-    "eslint": "^9.39.0",
+    "@typescript-eslint/eslint-plugin": "8.46.2",
+    "@typescript-eslint/parser": "8.46.2",
+    "eslint": "^9",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-roblox-ts": "^1.2.1",
@@ -24,7 +24,7 @@
     "prettier": "^3.6.2",
     "rbxts-transformer-flamework": "^1.3.2",
     "roblox-ts": "^3.0.0",
-    "typescript": "^5.5.3"
+    "typescript": "5.5.3"
   },
   "dependencies": {
     "@flamework/core": "^1.3.2",

@@ -1,6 +1,7 @@
 {
-	"recommendations": [
-		"roblox-ts.vscode-roblox-ts",
-		"dbaeumer.vscode-eslint"
-	]
+  "recommendations": [
+    "evaera.vscode-rojo",
+    "Roblox-TS.vscode-roblox-ts"
+  ]
 }
+

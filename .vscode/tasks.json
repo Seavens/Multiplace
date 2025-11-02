@@ -2,26 +2,38 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build Game",
+      "label": "Serve (Rojo)",
       "type": "shell",
-      "command": "npm run build:game",
-      "group": "build",
+      "command": "npm run serve:game",
       "problemMatcher": []
     },
     {
-      "label": "Watch Game",
+      "label": "Watch (rbxtsc)",
       "type": "shell",
       "command": "npm run watch:game",
       "isBackground": true,
-      "group": "build",
-      "problemMatcher": []
+      "problemMatcher": {
+        "owner": "roblox-ts",
+        "pattern": [
+          {
+            "regexp": ".*",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Starting type checking.*|.*Watching for file changes.*",
+          "endsPattern": ".*Found 0 errors.*|.*Watching for file changes.*"
+        }
+      }
     },
     {
-      "label": "Serve Game",
-      "type": "shell",
-      "command": "npm run serve:game",
-      "group": "test",
+      "label": "Dev",
+      "dependsOn": ["Serve (Rojo)", "Watch (rbxtsc)"],
       "problemMatcher": []
     }
   ]
 }
+
