@@ -17,7 +17,7 @@
 		"typeRoots": ["../../node_modules/@rbxts", "../../node_modules/@flamework"],
 
 		// configurable
-		"rootDirs": ["src", "../common/src"],
+		"rootDirs": ["../common/src"],
 		"outDir": "out",
 		"baseUrl": "src",
 		"paths": {

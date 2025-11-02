@@ -2,8 +2,8 @@ import { computed } from '@rbxts/charm';
 import { produce } from '@rbxts/immut';
 
 import { dataAtom } from './atom';
-import { DEFAULT_DATA } from './constants';
 import type { Data } from './types';
+import { DEFAULT_DATA } from './types';
 
 function buildKey(id: number): string {
   return `Player:${id}`;
