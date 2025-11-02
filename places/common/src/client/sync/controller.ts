@@ -1,8 +1,8 @@
 import type { OnStart } from '@flamework/core';
 import { Controller } from '@flamework/core';
 import CharmSync from '@rbxts/charm-sync';
-import { Events, Functions } from 'client/network';
-import { Selectors } from 'shared';
+import { Selectors } from '../../shared';
+import { Events, Functions } from '../network';
 
 @Controller()
 export class SyncController implements OnStart {

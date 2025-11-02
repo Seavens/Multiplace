@@ -2,8 +2,8 @@ import { computed } from '@rbxts/charm';
 import { produce } from '@rbxts/immut';
 
 import { dataAtom } from './atom';
+import { DEFAULT_DATA_TEMPLATE } from './constants';
 import type { Data } from './types';
-import { DEFAULT_DATA } from './types';
 
 function buildKey(id: number): string {
   return `Player:${id}`;
@@ -12,7 +12,7 @@ function buildKey(id: number): string {
 export class DataManager {
   public static getData(id: number): Data {
     const key = buildKey(id);
-    return dataAtom()[key] ?? DEFAULT_DATA;
+    return dataAtom()[key] ?? DEFAULT_DATA_TEMPLATE;
   }
 
   public static setData(id: number, data: Data): void {
@@ -24,7 +24,7 @@ export class DataManager {
 
   public static selectData(id: number): () => Data {
     const key = buildKey(id);
-    return computed(() => dataAtom()[key] ?? DEFAULT_DATA);
+    return computed(() => dataAtom()[key] ?? DEFAULT_DATA_TEMPLATE);
   }
 
   public static deleteData(id: number): void {
@@ -37,7 +37,7 @@ export class DataManager {
   public static updateData(id: number, mutator: (data: Data) => void): void {
     const key = buildKey(id);
     produce(dataAtom(), (draft): void => {
-      const data = draft[key] ?? DEFAULT_DATA;
+      const data = draft[key] ?? DEFAULT_DATA_TEMPLATE;
       mutator(data);
       draft[key] = data;
     });

@@ -4,8 +4,8 @@ import { effect } from '@rbxts/charm';
 import type { Document } from '@rbxts/lapis';
 import { createCollection } from '@rbxts/lapis';
 import { Players } from '@rbxts/services';
-import type { Data } from 'shared';
-import { DataManager, DEFAULT_DATA, IS_DATA } from 'shared';
+import type { Data } from '../../shared';
+import { DataManager, DEFAULT_DATA, IS_DATA } from '../../shared';
 
 const USE_MOCK_DATA = true;
 const COLLECTION_NAME = 'PlayerData';

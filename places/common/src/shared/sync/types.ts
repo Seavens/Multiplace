@@ -1,5 +1,5 @@
 import type { SyncPayload } from '@rbxts/charm-sync';
-import { dataAtom } from 'shared/data';
+import { dataAtom } from '../data';
 
 export const Selectors = {
   data: dataAtom,

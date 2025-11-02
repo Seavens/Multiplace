@@ -2,8 +2,8 @@ import type { OnStart } from '@flamework/core';
 import { Service } from '@flamework/core';
 import CharmSync from '@rbxts/charm-sync';
 import { Players } from '@rbxts/services';
-import { Events, Functions } from 'server/network';
-import { Selectors } from 'shared';
+import { Selectors } from '../../shared';
+import { Events, Functions } from '../network';
 
 @Service({})
 export class SyncService implements OnStart {

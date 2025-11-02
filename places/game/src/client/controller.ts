@@ -7,3 +7,4 @@ export class GameController implements OnStart {
     warn('GameController started');
   }
 }
+
