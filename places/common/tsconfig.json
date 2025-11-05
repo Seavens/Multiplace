@@ -11,5 +11,5 @@
 			"../../node_modules/@flamework"
 		],
 	},
-	"include": ["**/*", "../game/src/server/main.server.ts",]
+	"include": ["**/*"],
 }

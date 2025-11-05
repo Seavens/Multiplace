@@ -1,6 +1,5 @@
 import { atom } from '@rbxts/charm';
-
-import type { Data } from './types';
+import { Data } from './types';
 
 export interface DataState {
   readonly [user: string]: Data;

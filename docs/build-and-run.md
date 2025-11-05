@@ -1,18 +1,18 @@
-# Build and Run
+# Build & Run
 
-Requirements
+## Prerequisites
 - Node 18+
-- Roblox Studio + Rojo CLI (`rojo` on PATH)
+- Roblox Studio with the Rojo CLI on your PATH (`rojo --version`)
 
-Terminal workflow
-- Terminal A: `npm run serve:game` (Rojo serve places/game)
-- Terminal B: `npm run watch:game` (rbxtsc watch compile)
-- In Studio: open a base place and connect to the Rojo server
+## Day-to-day loop
+1. `npm run watch:game` — incremental `rbxtsc` build for `places/game` and shared code.
+2. `npm run serve:game` — Rojo serves `places/game/default.project.json`.
+3. In Studio, open any place and attach to the Rojo server.
 
-How it compiles
-- roblox-ts compiles TS under `places/game` and `places/common` into `out/game` and `out/common`
-- `places/game/default.project.json` mounts both `out/game` and `out/common` into ReplicatedStorage/ServerScriptService as appropriate
+## What gets built
+- roblox-ts outputs to `places/game/out` and `places/common/out`.
+- The default Rojo project mounts both outputs into ReplicatedStorage / ServerScriptService so game code and common code ship together.
 
-Single build
-- `npm run build:game` compiles once for CI or release output
+## One-off build
+- `npm run build:game` performs a single compile for deployments or CI.
 

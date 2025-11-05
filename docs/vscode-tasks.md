@@ -1,12 +1,12 @@
 # VS Code Tasks
 
-This repo includes tasks that wrap the npm scripts so you can run everything with one command.
+Tasks live in `.vscode/tasks.json` and mirror the npm scripts, so you can launch everything from the command palette.
 
-Tasks
-- Serve (Rojo): runs `npm run serve:game`
-- Watch (rbxtsc): runs `npm run watch:game`
-- Dev (compound): runs Serve and Watch together
+## Available tasks
+- `Watch Game`: runs `npm run watch:game` in the background.
+- `Serve Game`: runs `npm run serve:game`.
+- `Dev`: compound task that starts both of the above.
 
-Use
-- Open the command palette → “Run Task…” → choose “Dev”
+## Usage
+- Open the command palette → “Run Task…” → pick `Dev` for the full loop, or start individual tasks as needed.
 

@@ -13,6 +13,11 @@
 		"moduleDetection": "force",
 		"strict": true,
 		"target": "ESNext",
+		"baseUrl": ".",
+		"paths": {
+			"@common/*": ["places/common/src/*"],
+			"@game/*": ["places/game/src/*"]
+		},
 
 		"incremental": true,
 		"experimentalDecorators": true,

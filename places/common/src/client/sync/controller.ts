@@ -1,16 +1,15 @@
-import type { OnStart } from '@flamework/core';
-import { Controller } from '@flamework/core';
+import { Controller, OnStart } from '@flamework/core';
 import CharmSync from '@rbxts/charm-sync';
-import { Selectors } from '../../shared';
+import { CommonPayload, CommonSelectors } from '../../shared/sync/types';
 import { Events, Functions } from '../network';
 
 @Controller()
-export class SyncController implements OnStart {
-  private syncer = CharmSync.client({ atoms: Selectors });
-  public onStart() {
-    Events.sync.connect((payload) => {
+export class CommonSyncController implements OnStart {
+  private readonly syncer = CharmSync.client({ atoms: CommonSelectors });
+  public onStart(): void {
+    Events.common.sync.connect((payload: CommonPayload) => {
       this.syncer.sync(payload);
     });
-    Functions.requestHydration.invoke();
+    Functions.common.requestHydration.invoke();
   }
 }

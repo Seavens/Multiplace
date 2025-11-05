@@ -1,58 +1,26 @@
-# Sync and Data
+# Sync & Data
 
-Charm atoms
-- Atoms are reactive state containers from `@rbxts/charm`.
-- Root data atom: `places/common/src/shared/data/atom.ts` (`dataAtom`).
+## Architecture
+- Common owns player data: atoms live under `places/common/src/shared`, and `DataService` persists them with Lapis.
+- Game adds per-experience state under `places/game/src/shared` (for example `gameAtom`).
+- Both layers share networking through `@common/shared/network`, so the game can extend events/functions while reusing the core sync pipeline.
 
-Selectors for sync
-- `places/common/src/shared/sync/types.ts` exports `Selectors` that map names to atoms.
-- The server and client pass `Selectors` into charm-sync so state can replicate.
+## Charm + charm-sync
+- Atoms (`atom(...)`) are reactive containers. Example: `dataAtom` stores `Data` keyed by player id.
+- `CommonSelectors` and `GameSelectors` map names to atoms. charm-sync snapshots those selectors and ships payloads to clients.
+- Server: `GameSyncService` and `CommonSyncService` hydrate players on join or on demand (`requestHydration`).
+- Client: the corresponding controllers feed payloads into `CharmSync.client(...)`, keeping local atoms up to date.
 
-Server
-- `places/common/src/server/sync/service.ts`:
-  - `CharmSync.server({ atoms: Selectors, interval: 0.1, autoSerialize: true })`
-  - Hydrates players on join and on request.
-- `places/common/src/server/data/service.ts`:
-  - Loads a Lapis document per player
-  - Uses `effect` to mirror `DataManager.getData(id)` into the document
+## Data lifecycle
+1. `DataService` loads/creates a Lapis document for each player and writes it into `DataManager`.
+2. Managers (`DataManager`, `GameManager`, etc.) mutate atoms via their updater helpers (never mutate snapshots directly).
+3. charm-sync pushes the changed selectors to each subscribed client, where application code can react (e.g. `watchMap`).
 
-Client
-- `places/common/src/client/sync/controller.ts`:
-  - Creates `CharmSync.client({ atoms: Selectors })`
-  - Applies incoming payloads via a Flamework networking event
-- `places/common/src/client/data/controller.ts`:
-  - Demonstrates `watchMap(dataAtom, { added/changed/removed })`
+## Extending with new atoms
+1. Define the state shape and defaults in `places/common/src/shared/...` (optionally add `t` validators).
+2. Create the atom and expose it through a manager if it needs helpers.
+3. Add the atom to `CommonSelectors` or `GameSelectors` so charm-sync replicates it.
+4. Update networking augmentations if you need extra RPCs/events.
 
-Add a new atom and sync it
-1) Define types (optional if not player data)
-- Add to `places/common/src/shared/...` as needed, potentially with `@rbxts/t` validators for server data.
-
-2) Create the atom
-- Example: `places/common/src/shared/inventory/atom.ts`
-  ```ts
-  import { atom } from '@rbxts/charm';
-
-  export interface InventoryState { [user: string]: string[] }
-  export const inventoryAtom = atom<InventoryState>({});
-  ```
-
-3) Export it and add to Selectors
-- `places/common/src/shared/sync/types.ts`:
-  ```ts
-  import { dataAtom } from '../data';
-  import { inventoryAtom } from '../inventory/atom';
-
-  export const Selectors = {
-    data: dataAtom,
-    inventory: inventoryAtom,
-  };
-  ```
-
-4) Use it
-- Server: update the atom via a manager or direct updates to replicate
-- Client: `Charm.subscribe` or a watcher (like `watchMap`) to react to changes
-
-Notes
-- If syncing player data stored in Lapis, ensure schema (`t.strictInterface`) matches what you write.
-- Always update atoms using their updater function (e.g. `atom(prev => newPrev)`) so subscriptions fire.
+Keep writes pure: always supply a new value or use `produce` in the atom updater so subscribers and Lapis effects see the change.
 

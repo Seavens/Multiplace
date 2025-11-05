@@ -1,8 +1,8 @@
-import type { SyncPayload } from '@rbxts/charm-sync';
-import { dataAtom } from '../data';
+import { SyncPayload } from '@rbxts/charm-sync';
+import { dataAtom } from '../data/atom';
 
-export const Selectors = {
+export const CommonSelectors = {
   data: dataAtom,
 };
 
-export type CharmPayload = SyncPayload<typeof Selectors>;
+export type CommonPayload = SyncPayload<typeof CommonSelectors>;

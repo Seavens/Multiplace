@@ -1,11 +1,9 @@
-import type { OnStart } from '@flamework/core';
-import { Service } from '@flamework/core';
+import { OnStart, Service } from '@flamework/core';
 import { effect } from '@rbxts/charm';
-import type { Document } from '@rbxts/lapis';
-import { createCollection } from '@rbxts/lapis';
+import { createCollection, Document } from '@rbxts/lapis';
 import { Players } from '@rbxts/services';
-import type { Data } from '../../shared';
-import { DataManager, DEFAULT_DATA, IS_DATA } from '../../shared';
+import { DataManager } from '../../shared/data/manager';
+import { Data, DEFAULT_DATA, IS_DATA } from '../../shared/data/types';
 
 const USE_MOCK_DATA = true;
 const COLLECTION_NAME = 'PlayerData';
@@ -55,7 +53,7 @@ export class DataService implements OnStart {
       DataService.subs.set(id, unsubscribe);
       DataService.docs.set(id, doc);
     } catch (err) {
-      warn(`DataService: failed to load data for ${player.Name} (${id}): ${err}`);
+      warn(`[DataService]: failed to load data for ${player.Name} (${id}): ${err}`);
       DataManager.setData(id, DEFAULT_DATA);
     }
   }
@@ -75,7 +73,7 @@ export class DataService implements OnStart {
       return;
     }
 
-    await doc.close().catch((e) => warn(`DataService: close failed for ${id}: ${e}`));
+    await doc.close().catch((e) => warn(`[DataService]: close failed for ${id}: ${e}`));
     DataService.docs.delete(id);
   }
 }

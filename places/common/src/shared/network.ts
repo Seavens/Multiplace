@@ -1,18 +1,21 @@
 import { Networking } from '@flamework/networking';
+import type { CommonPayload } from './sync/types';
 
-import type { CharmPayload } from './sync';
+export interface ClientToServerEvents {}
 
-interface ClientToServerEvents {}
-
-interface ServerToClientEvents {
-  sync: (p: CharmPayload) => void;
+export interface ServerToClientEvents {
+  common: {
+    sync: (payload: CommonPayload) => void;
+  };
 }
 
-interface ClientToServerFunctions {
-  requestHydration: () => void;
+export interface ClientToServerFunctions {
+  common: {
+    requestHydration: () => void;
+  };
 }
 
-interface ServerToClientFunctions {}
+export interface ServerToClientFunctions {}
 
 export const GlobalEvents = Networking.createEvent<ClientToServerEvents, ServerToClientEvents>();
 export const GlobalFunctions = Networking.createFunction<

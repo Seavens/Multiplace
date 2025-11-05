@@ -1,21 +1,18 @@
 # Troubleshooting
 
-No client change logs
-- Ensure you update atoms using their updater, not mutating the snapshot:
-  - Good: `dataAtom(prev => ({ ...prev, [key]: next }))`
-  - Good: `dataAtom(prev => produce(prev, draft => { ... }))`
-  - Bad: calling `produce(prev, ...)` without writing back to the atom
+## Atom updates not firing
+- Always call the atom with a new value or an updater; never mutate the snapshot you read.
+- Good: `dataAtom((prev) => produce(prev, (draft) => { ... }))`
+- Bad: `produce(prev, ...)` without assigning the result back through the atom.
 
-Lapis assertion on write
-- Your schema uses `t.strictInterface` in `types.ts`. Extra fields or wrong shapes will fail validation.
-- Fix by:
-  - Writing only fields in the schema; or
-  - Expanding the schema and defaults to include desired fields
+## Lapis validation errors
+- Schemas use `t.strictInterface`, so unexpected keys or shapes throw.
+- Align writes with `DEFAULT_DATA`, or expand the validator/defaults before sending new fields.
 
-Defaults being mutated globally
-- Always clone defaults for new players (see `cloneDefaults()` pattern in `DataManager`).
+## Shared defaults leaking state
+- Clone defaults when seeding player data (`cloneDefaults()` already does this). Avoid reusing mutable tables between players.
 
-Rojo not seeing code
-- Ensure `npm run watch:game` is running so `out/` is populated
-- Ensure `default.project.json` mounts `out/game` and `out/common`
+## Rojo can’t find scripts
+- Keep `npm run watch:game` running so `out/` stays fresh.
+- Confirm `places/game/default.project.json` maps `out/common` and `out/game` to the right services.
 

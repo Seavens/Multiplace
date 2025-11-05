@@ -1,52 +1,44 @@
 # Flamework Multiplace Template
 
-A clean starting point for Roblox multiplace projects using Flamework, Lapis (data), Charm (state), and charm-sync (state replication).
+Starter kit for Roblox multiplace projects with Flamework, Lapis-backed data, Charm state, and charm-sync replication.
 
 - Stack: Flamework • Lapis • Charm • charm-sync • roblox-ts • Rojo
-- Places: `places/common` (shared code) and `places/game` (game-specific)
+- Places: `places/common` (shared runtime + data) and `places/game` (experience-specific code)
 
-Initial idea from imkalrbx/rbxts-multiplace-setup-flamework.
+See `docs/` for deeper dives:
+- `docs/build-and-run.md` — local loop + deploy build command
+- `docs/sync-and-data.md` — how atoms, sync, and data layers fit together
+- `docs/troubleshooting.md` — quick fixes for common issues
+- `docs/vscode-tasks.md` — one-click tasks inside VS Code
 
-See the docs/ folder for focused guides:
-- docs/build-and-run.md
-- docs/vscode-tasks.md
-- docs/sync-and-data.md
-- docs/troubleshooting.md
+## Getting Started
+1. Install Node 18+ and the Rojo CLI (`rojo --version`).
+2. `npm install`
+3. In one terminal run `npm run watch:game` (rbxtsc).
+4. In another run `npm run serve:game` (Rojo).
+5. Join from Studio and attach to the Rojo server.
 
-Quick start
-- Install Node 18+ and Rojo
-- `npm install`
-- In one terminal: `npm run serve:game`
-- In another: `npm run watch:game`
-- Join the local server from Roblox Studio (connect to Rojo)
+## Highlights
+- Charm atoms live in `places/common/src/shared`; game-specific atoms live under `places/game/src/shared`.
+- charm-sync bridges the server/client gaps (`CommonSyncService`, `GameSyncService`, and matching controllers).
+- `DataService` uses Lapis documents and `@rbxts/t` validation; mock data is on by default for local work.
+- Game code can mutate shared data through the exported managers (`DataManager`, `GameManager`).
 
-Highlights
-- Charm atoms for reactive state in `places/common/src/shared`
-- charm-sync wiring to replicate atoms server↔client
-- Lapis-backed player documents with t‑validated schema
-- Dev default: DataService uses mock data (`USE_MOCK_DATA = true`)
+## Using the Template
+- Click “Use this template” on GitHub, or clone then `rm -rf .git && git init -b main`.
+- Update `package.json` metadata, then `npm install`.
 
-Template Usage
-- On GitHub, click “Use this template” to create a new repo
-- Or clone and re-init:
-  - `git clone <this-repo>` → `rm -rf .git` → `git init -b main`
-  - Update `name` in `package.json`
-  - `npm install`
+## Production Checklist
+- Disable mock data: set `USE_MOCK_DATA = false` in `places/common/src/server/data/service.ts`.
+- Extend `DEFAULT_DATA` and `IS_DATA` when you add new fields; keep validators and defaults in sync.
+- Tune sync interval in `places/common/src/server/sync/service.ts` (`interval: 0.1` by default).
+- Replace `warn(...)` with structured logging if you need observability.
+- Use `npm run build:game` for CI/deploy builds; ensure the Rojo project still mounts `out/common` + `out/game`.
 
-Production Notes
-- Data persistence
-  - Set `USE_MOCK_DATA = false` in `places/common/src/server/data/service.ts:11` before release
-  - Ensure your `IS_DATA` validators match what you write, and expand defaults when adding fields
-- Sync tuning
-  - Server sync interval is `0.1` by default (see `places/common/src/server/sync/service.ts:12`); raise to reduce network churn
-- Errors & logging
-  - Replace `warn(...)` debug logs with structured logging as needed
-- CI/build
-  - Use `npm run build:game` for a one-off build; ensure Rojo project includes both `out/common` and `out/game`
+## Structure
+- `places/common` — shared data, networking, services, and client controllers used by every place.
+- `places/game` — game-specific services/controllers plus Rojo project configuration.
 
-License
-- MIT. See `LICENSE`.
+---
 
-Structure (brief)
-- `places/common`: shared code for all places
-- `places/game`: place-specific code + Rojo project
+Initial idea inspired by imkalrbx/rbxts-multiplace-setup-flamework. Licensed MIT (see `LICENSE`).

@@ -2,13 +2,13 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Serve (Rojo)",
+      "label": "Serve Game",
       "type": "shell",
       "command": "npm run serve:game",
       "problemMatcher": []
     },
     {
-      "label": "Watch (rbxtsc)",
+      "label": "Watch Game",
       "type": "shell",
       "command": "npm run watch:game",
       "isBackground": true,
@@ -31,7 +31,7 @@
     },
     {
       "label": "Dev",
-      "dependsOn": ["Serve (Rojo)", "Watch (rbxtsc)"],
+      "dependsOn": ["Serve Game", "Watch Game"],
       "problemMatcher": []
     }
   ]
