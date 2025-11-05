@@ -1,8 +1,8 @@
-import { Events, Functions } from '@common/server/network';
 import { OnStart, Service } from '@flamework/core';
+import { GamePayload, GameSelectors } from '@game/shared/sync/types';
 import CharmSync from '@rbxts/charm-sync';
 import { Players } from '@rbxts/services';
-import { GamePayload, GameSelectors } from '../../shared/sync/types';
+import { Events, Functions } from '../network';
 
 @Service({})
 export class GameSyncService implements OnStart {
@@ -18,6 +18,6 @@ export class GameSyncService implements OnStart {
     for (const player of Players.GetPlayers()) {
       syncer.hydrate(player);
     }
-    Functions.game.requestHydration.setCallback((player: Player) => syncer.hydrate(player));
+    Functions.requestHydration.setCallback((player: Player) => syncer.hydrate(player));
   }
 }

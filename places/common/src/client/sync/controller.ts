@@ -10,6 +10,6 @@ export class CommonSyncController implements OnStart {
     Events.common.sync.connect((payload: CommonPayload) => {
       this.syncer.sync(payload);
     });
-    Functions.common.requestHydration.invoke();
+    Functions.requestHydration.invoke();
   }
 }

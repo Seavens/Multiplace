@@ -18,6 +18,6 @@ export class CommonSyncService implements OnStart {
     for (const player of Players.GetPlayers()) {
       syncer.hydrate(player);
     }
-    Functions.common.requestHydration.setCallback((plr: Player) => syncer.hydrate(plr));
+    Functions.requestHydration.setCallback((plr: Player) => syncer.hydrate(plr));
   }
 }

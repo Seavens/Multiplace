@@ -1,23 +1,15 @@
 import type { GamePayload } from './sync/types';
 
 declare module '@common/shared/network' {
-  interface ClientToServerEvents {
-    game: {};
-  }
+  interface ClientToServerEvents {}
 
   interface ServerToClientEvents {
     game: {
-      sync: (payload: GamePayload) => void;
+      sync: (payload: GamePayload) => void; // Game specific
     };
   }
 
-  interface ClientToServerFunctions {
-    game: {
-      requestHydration: () => void;
-    };
-  }
+  interface ClientToServerFunctions {}
 
-  interface ServerToClientFunctions {
-    game: {};
-  }
+  interface ServerToClientFunctions {}
 }

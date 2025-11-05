@@ -5,14 +5,12 @@ export interface ClientToServerEvents {}
 
 export interface ServerToClientEvents {
   common: {
-    sync: (payload: CommonPayload) => void;
+    sync: (payload: CommonPayload) => void; // Common specific
   };
 }
 
 export interface ClientToServerFunctions {
-  common: {
-    requestHydration: () => void;
-  };
+  requestHydration: () => void; // Works for common and place specific
 }
 
 export interface ServerToClientFunctions {}

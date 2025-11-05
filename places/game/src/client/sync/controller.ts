@@ -9,6 +9,6 @@ export class GameSyncController implements OnStart {
 
   public onStart(): void {
     Events.game.sync.connect((payload) => this.syncer.sync(payload));
-    Functions.game.requestHydration();
+    Functions.requestHydration();
   }
 }
