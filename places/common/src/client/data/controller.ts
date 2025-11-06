@@ -1,7 +1,5 @@
+import { Data, dataAtom, watchMap } from '@common/shared';
 import { Controller, OnStart } from '@flamework/core';
-import { dataAtom } from '../../shared/data/atom';
-import { Data } from '../../shared/data/types';
-import { watchMap } from '../../shared/sync/watch';
 
 @Controller({})
 export class DataController implements OnStart {

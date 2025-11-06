@@ -1,7 +1,7 @@
+import { CommonSelectors } from '@common/shared';
 import { OnStart, Service } from '@flamework/core';
 import CharmSync from '@rbxts/charm-sync';
 import { Players } from '@rbxts/services';
-import { CommonSelectors } from '../../shared/sync/types';
 import { Events, Functions } from '../network';
 
 @Service({})

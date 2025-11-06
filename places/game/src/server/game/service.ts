@@ -1,7 +1,7 @@
-import { DataManager } from '@common/shared/data/manager';
+import { DataManager } from '@common/shared';
 import { OnTick, Service } from '@flamework/core';
+import { GameManager } from '@game/shared';
 import { Players } from '@rbxts/services';
-import { GameManager } from '../../shared/game/manager';
 
 const COIN_REWARD = 10;
 const REWARD_INTERVAL = 5;

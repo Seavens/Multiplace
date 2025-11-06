@@ -1,7 +1,7 @@
-import { Events, Functions } from '@common/client/network';
 import { Controller, OnStart } from '@flamework/core';
+import { GameSelectors } from '@game/shared';
 import CharmSync from '@rbxts/charm-sync';
-import { GameSelectors } from '../../shared/sync/types';
+import { Events, Functions } from '../network';
 
 @Controller({})
 export class GameSyncController implements OnStart {

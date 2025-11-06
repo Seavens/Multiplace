@@ -1,6 +1,6 @@
+import { CommonPayload, CommonSelectors } from '@common/shared';
 import { Controller, OnStart } from '@flamework/core';
 import CharmSync from '@rbxts/charm-sync';
-import { CommonPayload, CommonSelectors } from '../../shared/sync/types';
 import { Events, Functions } from '../network';
 
 @Controller()

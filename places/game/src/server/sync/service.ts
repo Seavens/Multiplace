@@ -1,5 +1,5 @@
 import { OnStart, Service } from '@flamework/core';
-import { GamePayload, GameSelectors } from '@game/shared/sync/types';
+import { GamePayload, GameSelectors } from '@game/shared';
 import CharmSync from '@rbxts/charm-sync';
 import { Players } from '@rbxts/services';
 import { Events, Functions } from '../network';

@@ -1,9 +1,8 @@
+import { Data, DataManager, DEFAULT_DATA, IS_DATA } from '@common/shared';
 import { OnStart, Service } from '@flamework/core';
 import { effect } from '@rbxts/charm';
 import { createCollection, Document } from '@rbxts/lapis';
 import { Players } from '@rbxts/services';
-import { DataManager } from '../../shared/data/manager';
-import { Data, DEFAULT_DATA, IS_DATA } from '../../shared/data/types';
 
 const USE_MOCK_DATA = true;
 const COLLECTION_NAME = 'PlayerData';
