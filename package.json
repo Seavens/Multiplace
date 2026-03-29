@@ -13,7 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "@rbxts/compiler-types": "3.0.0-types.0",
-    "@rbxts/types": "^1.0.888",
+    "@rbxts/types": "^1.0.913",
     "@typescript-eslint/eslint-plugin": "8.46.2",
     "@typescript-eslint/parser": "8.46.2",
     "eslint": "^9",
