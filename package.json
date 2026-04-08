@@ -15,7 +15,7 @@
     "@rbxts/compiler-types": "3.0.0-types.0",
     "@rbxts/types": "^1.0.888",
     "@typescript-eslint/eslint-plugin": "8.46.2",
-    "@typescript-eslint/parser": "8.46.2",
+    "@typescript-eslint/parser": "8.57.2",
     "eslint": "^9",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
