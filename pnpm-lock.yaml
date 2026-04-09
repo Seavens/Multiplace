@@ -40,16 +40,16 @@ importers:
         specifier: 3.0.0-types.0
         version: 3.0.0-types.0
       '@rbxts/types':
-        specifier: ^1.0.888
-        version: 1.0.888
+        specifier: ^1.0.913
+        version: 1.0.913
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.46.2
+        specifier: 8.46.2
         version: 8.46.2(@typescript-eslint/parser@8.46.2(eslint@9.39.0)(typescript@5.5.3))(eslint@9.39.0)(typescript@5.5.3)
       '@typescript-eslint/parser':
-        specifier: ^8.46.2
+        specifier: 8.46.2
         version: 8.46.2(eslint@9.39.0)(typescript@5.5.3)
       eslint:
-        specifier: ^9.39.0
+        specifier: ^9
         version: 9.39.0
       eslint-config-prettier:
         specifier: ^10.1.8
@@ -73,7 +73,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       typescript:
-        specifier: ^5.5.3
+        specifier: 5.5.3
         version: 5.5.3
 
 packages:
@@ -190,8 +190,8 @@ packages:
   '@rbxts/t@3.2.1':
     resolution: {integrity: sha512-/fnf2QSx+TI3HSJ6QW2ikvGQk0mlx/63UXo60pLAKGqbxXiAuTJh88bpKpHw6aCzfFLJAwrVIcgCUOokLMPcag==}
 
-  '@rbxts/types@1.0.888':
-    resolution: {integrity: sha512-K7NQyBSWWlZSRZO8LwGZXJUxK7ebVdZ+jUZgoAzWjpP0dyzM4gpC6Vf6wkDbH1RFXQ9vrJNeVGg1U9/XcW1YAg==}
+  '@rbxts/types@1.0.913':
+    resolution: {integrity: sha512-AweuNYRVJb6y4PNajx2mnpqv+hm0+8GWtH9Dj4EMUuOVN5qcfcOMNSqjvQ4dmF5u0yQ89HKGeXa+4sLnaTIEng==}
 
   '@roblox-ts/luau-ast@2.0.0':
     resolution: {integrity: sha512-cmMi093IdwBOLVxwuordhM8AmtbyTIyRpsTbB0D/JauidW4SXsQRQowSwWjHo4QP0DRJBXvOIlxtqEQi50uNzQ==}
@@ -562,6 +562,7 @@ packages:
   glob@9.3.5:
     resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
     engines: {node: '>=16 || 14 >=14.17'}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
@@ -1035,7 +1036,7 @@ snapshots:
 
   '@rbxts/t@3.2.1': {}
 
-  '@rbxts/types@1.0.888': {}
+  '@rbxts/types@1.0.913': {}
 
   '@roblox-ts/luau-ast@2.0.0': {}
 
