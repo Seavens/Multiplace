@@ -1,33 +1,4 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
-    "module": "commonjs",
-    "moduleResolution": "Node",
-    "noLib": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleDetection": "force",
-    "strict": true,
-    "target": "ESNext",
-    "baseUrl": ".",
-    "skipLibCheck": true,
-    "paths": {
-      "@common/*": ["places/common/src/*"],
-      "@game/*": ["places/game/src/*"],
-      "@lobby/*": ["places/lobby/src/*"]
-    },
-    "types": ["compiler-types", "types"],
-
-    "incremental": true,
-    "experimentalDecorators": true,
-    "plugins": [
-      {
-        "transform": "rbxts-transformer-flamework",
-        "obfuscation": true
-      }
-    ]
-  }
+  "extends": "./tsconfig.base.json",
+  "files": []
 }

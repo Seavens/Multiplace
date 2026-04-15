@@ -53,7 +53,7 @@ export class DataManager {
         const current = draft[key];
         const base = current ? normalizeData(current) : createDefaultData();
         const result = mutator(base);
-        draft[key] = normalizeData((result ?? base) as Data);
+        draft[key] = normalizeData(result ?? base);
       }),
     );
   }

@@ -5,11 +5,11 @@ import {
   dataAtom,
   DataManager,
   DataReplica,
-  iterateRecord,
   parseDataUserId,
 } from '@common/shared';
 import type { OnStart } from '@flamework/core';
 import { Service } from '@flamework/core';
+import Object from '@rbxts/object-utils';
 import { Players } from '@rbxts/services';
 import Squash from '@rbxts/squash';
 
@@ -59,25 +59,26 @@ export class DataReplicationService implements OnStart {
     const current = dataAtom();
     const seen = new Set<string>();
 
-    iterateRecord(current, (key, data) => {
-      seen.add(key);
+    for (const [key, data] of Object.entries(current)) {
+      const recordKey = key as string;
+      seen.add(recordKey);
 
-      const userId = parseDataUserId(key);
+      const userId = parseDataUserId(recordKey);
       if (userId === undefined || !this.playerStateService.isPlayerLoaded(userId)) {
-        return;
+        continue;
       }
 
-      let replica = this.replicas.get(key);
+      let replica = this.replicas.get(recordKey);
       if (!replica) {
-        replica = new DataReplica(key, data);
-        this.replicas.set(key, replica);
+        replica = new DataReplica(recordKey, data);
+        this.replicas.set(recordKey, replica);
       }
 
       const delta = replica.update(data);
       if (delta !== undefined) {
         this.pushDelta(grouped, userId, delta);
       }
-    });
+    }
 
     const stale: Array<string> = [];
     this.replicas.forEach((_, key) => {

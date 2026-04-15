@@ -11,6 +11,6 @@ export class LobbyReplicationController implements OnStart {
     Events.lobby.sync.connect((payload: LobbyReplicationPayload) =>
       LobbyManager.setState(payload.state),
     );
-    Functions.requestLobbyHydration.invoke();
+    void Functions.requestLobbyHydration.invoke();
   }
 }

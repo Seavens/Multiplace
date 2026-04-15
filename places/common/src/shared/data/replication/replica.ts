@@ -76,9 +76,9 @@ export class DataReplica {
   }
 
   public static deserialize(cursor: Cursor): DataReplicationDelta {
-    const key = serdesKey.des(cursor) as string;
-    const flags = serdesFlags.des(cursor) as DataFlags;
-    const payload = serdesPayload.des(cursor) as string | undefined;
+    const key = serdesKey.des(cursor);
+    const flags = serdesFlags.des(cursor);
+    const payload = serdesPayload.des(cursor);
 
     return {
       key,

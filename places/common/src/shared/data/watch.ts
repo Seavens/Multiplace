@@ -1,6 +1,5 @@
 import Charm from '@rbxts/charm';
-
-import { iterateRecord } from '../utils';
+import Object from '@rbxts/object-utils';
 
 type MapLike<T> = Readonly<Record<string, T | undefined>>;
 type Unsubscribe = () => void;
@@ -17,21 +16,23 @@ export function watchMap<T>(
   const { added, changed, removed } = handlers;
 
   return Charm.subscribe(atom, (nxt) => {
-    iterateRecord(prev, (uuid, p) => {
-      if ((nxt as MapLike<T>)[uuid] === undefined) {
-        removed?.(uuid, p as T);
+    for (const [uuid, p] of Object.entries(prev)) {
+      const id = uuid;
+      if (nxt[id] === undefined) {
+        removed?.(id, p);
       }
-    });
+    }
 
-    iterateRecord(nxt as MapLike<T>, (uuid, n) => {
-      const p = prev[uuid];
+    for (const [uuid, n] of Object.entries(nxt)) {
+      const id = uuid;
+      const p = prev[id];
       if (p === undefined) {
-        added?.(uuid, n as T);
+        added?.(id, n);
       } else if (p !== n) {
-        changed?.(uuid, p as T, n as T);
+        changed?.(id, p, n);
       }
-    });
+    }
 
-    prev = nxt as MapLike<T>;
+    prev = nxt;
   });
 }

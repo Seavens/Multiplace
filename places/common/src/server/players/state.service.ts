@@ -36,11 +36,15 @@ export class PlayerStateService implements OnStart {
   }
 
   public getPlayers(): ReadonlyArray<Player> {
-    return [...this.players];
+    const players = new Array<Player>();
+    this.players.forEach((player) => players.push(player));
+    return players;
   }
 
   public getLoadedPlayers(): ReadonlyArray<Player> {
-    return [...this.loadedPlayers];
+    const loadedPlayers = new Array<Player>();
+    this.loadedPlayers.forEach((player) => loadedPlayers.push(player));
+    return loadedPlayers;
   }
 
   public getPlayerByUserId(userId: number): Player | undefined {

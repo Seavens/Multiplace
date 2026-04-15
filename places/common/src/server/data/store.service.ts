@@ -41,8 +41,12 @@ export class DataStoreService implements OnStart {
   public constructor(private readonly playerStateService: PlayerStateService) {}
 
   public onStart(): void {
-    this.playerStateService.onPlayerAdded((player) => this.loadPlayer(player));
-    this.playerStateService.onPlayerRemoving((player) => this.unloadPlayer(player));
+    this.playerStateService.onPlayerAdded((player) => {
+      void this.loadPlayer(player);
+    });
+    this.playerStateService.onPlayerRemoving((player) => {
+      void this.unloadPlayer(player);
+    });
   }
 
   private async loadPlayer(player: Player): Promise<void> {
@@ -65,7 +69,9 @@ export class DataStoreService implements OnStart {
       if (!this.playerStateService.getPlayerByUserId(id)) {
         await doc
           .close()
-          .catch((e) => warn(`[DataStoreService]: close on early-exit failed for ${id}: ${e}`));
+          .catch((e) =>
+            warn(`[DataStoreService]: close on early-exit failed for ${id}: ${tostring(e)}`),
+          );
         return;
       }
 
@@ -92,7 +98,7 @@ export class DataStoreService implements OnStart {
       this.subs.set(id, unsubscribe);
       this.docs.set(id, doc);
     } catch (err) {
-      warn(`[DataStoreService]: failed to load data for ${player.Name} (${id}): ${err}`);
+      warn(`[DataStoreService]: failed to load data for ${player.Name} (${id}): ${tostring(err)}`);
       DataManager.setData(id, DEFAULT_DATA);
     }
 
@@ -130,7 +136,9 @@ export class DataStoreService implements OnStart {
       return;
     }
 
-    await doc.close().catch((e) => warn(`[DataStoreService]: close failed for ${id}: ${e}`));
+    await doc
+      .close()
+      .catch((e) => warn(`[DataStoreService]: close failed for ${id}: ${tostring(e)}`));
     this.docs.delete(id);
   }
 }

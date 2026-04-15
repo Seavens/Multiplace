@@ -149,7 +149,7 @@ const elapsed = computed(() => math.floor(GameManager.getState().time));
 effect(() => print(`elapsed ${elapsed()}s`));
 ```
 
-**`iterateRecord`**: roblox-ts bans `for...of` on Luau tables. Import `iterateRecord` from `@common/shared` to iterate `Record<string, V>`. Use `.forEach()` for `Map` and `Set`.
+**Record iteration**: use `Object.entries(record)` from `@rbxts/object-utils` for plain record tables. Use `.forEach()` for `Map` and `Set`.
 
 ---
 

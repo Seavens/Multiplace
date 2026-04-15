@@ -11,13 +11,13 @@ const serdesCount = Squash.vlq();
 export class DataController implements OnStart {
   public onStart(): void {
     Events.core.dataDelta.connect((payload) => this.onDataDelta(payload));
-    Functions.requestHydration.invoke();
+    void Functions.requestHydration.invoke();
   }
 
   private onDataDelta(payload: buffer): void {
     const [ok, err] = pcall(() => {
       const cursor = Squash.frombuffer(payload);
-      const count = serdesCount.des(cursor) as number;
+      const count = serdesCount.des(cursor);
 
       for (let i = 0; i < count; i++) {
         const delta = DataReplica.deserialize(cursor);
@@ -38,7 +38,7 @@ export class DataController implements OnStart {
     });
 
     if (!ok) {
-      warn(`[DataController] failed to deserialize delta: ${err}`);
+      warn(`[DataController] failed to deserialize delta: ${tostring(err)}`);
     }
   }
 }
