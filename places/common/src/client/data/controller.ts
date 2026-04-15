@@ -1,19 +1,44 @@
-import { Data, dataAtom, watchMap } from '@common/shared';
-import { Controller, OnStart } from '@flamework/core';
+import { DataManager, DataReplica, normalizeData, parseDataUserId } from '@common/shared';
+import type { OnStart } from '@flamework/core';
+import { Controller } from '@flamework/core';
+import Squash from '@rbxts/squash';
+
+import { Events, Functions } from '../network';
+
+const serdesCount = Squash.vlq();
 
 @Controller({})
 export class DataController implements OnStart {
   public onStart(): void {
-    watchMap(dataAtom, {
-      added: (userId: string, data: Data) => {
-        print(`[DataController]: User ${userId} data added`, data);
-      },
-      changed: (userId: string, _prev: Data, cur: Data) => {
-        print(`[DataController]: User ${userId} data changed`, cur);
-      },
-      removed: (userId: string, data: Data) => {
-        print(`[DataController]: User ${userId} data removed`, data);
-      },
+    Events.core.dataDelta.connect((payload) => this.onDataDelta(payload));
+    Functions.requestHydration.invoke();
+  }
+
+  private onDataDelta(payload: buffer): void {
+    const [ok, err] = pcall(() => {
+      const cursor = Squash.frombuffer(payload);
+      const count = serdesCount.des(cursor) as number;
+
+      for (let i = 0; i < count; i++) {
+        const delta = DataReplica.deserialize(cursor);
+        const userId = parseDataUserId(delta.key);
+        if (userId === undefined) {
+          continue;
+        }
+
+        if (delta.cleanup) {
+          DataManager.deleteData(userId);
+          continue;
+        }
+
+        if (delta.data !== undefined) {
+          DataManager.setData(userId, normalizeData(delta.data));
+        }
+      }
     });
+
+    if (!ok) {
+      warn(`[DataController] failed to deserialize delta: ${err}`);
+    }
   }
 }

@@ -14,6 +14,7 @@
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
 	"cSpell.words": [
-		"multiplace"
+		"multiplace",
+		"Teleporting"
 	]
 }

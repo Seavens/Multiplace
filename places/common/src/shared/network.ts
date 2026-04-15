@@ -1,11 +1,12 @@
 import { Networking } from '@flamework/networking';
-import type { CommonPayload } from './sync/types';
+
+import type { DataReplicationPayload } from './data/replication';
 
 export interface ClientToServerEvents {}
 
 export interface ServerToClientEvents {
-  common: {
-    sync: (payload: CommonPayload) => void;
+  core: {
+    dataDelta: (payload: DataReplicationPayload) => void;
   };
 }
 

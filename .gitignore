@@ -3,3 +3,6 @@
 /places/*/include
 /places/*/flamework.build
 *.tsbuildinfo
+
+# macOS
+.DS_Store

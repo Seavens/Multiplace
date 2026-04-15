@@ -1,0 +1,73 @@
+{
+  "name": "lobby-place",
+  "globIgnorePaths": ["**/package.json", "**/tsconfig*.json"],
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "TS": {
+        "$path": "out/lobby/src/server"
+      },
+      "common": {
+        "$path": "out/common/src/server"
+      }
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "rbxts_include": {
+        "$path": "include",
+        "node_modules": {
+          "$className": "Folder",
+          "@rbxts": {
+            "$path": "../../node_modules/@rbxts"
+          },
+          "@flamework": {
+            "$path": "../../node_modules/@flamework"
+          }
+        }
+      },
+      "TS": {
+        "$path": "out/lobby/src/shared"
+      },
+      "common": {
+        "$path": "out/common/src/shared"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "TS": {
+          "$path": "out/lobby/src/client"
+        },
+        "common": {
+          "$path": "out/common/src/client"
+        }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$properties": {
+        "FilteringEnabled": true
+      },
+      "LobbySpawns": {
+        "$className": "Folder"
+      },
+      "QueuePads": {
+        "$className": "Folder"
+      }
+    },
+    "HttpService": {
+      "$className": "HttpService",
+      "$properties": {
+        "HttpEnabled": true
+      }
+    },
+    "SoundService": {
+      "$className": "SoundService",
+      "$properties": {
+        "RespectFilteringEnabled": true
+      }
+    }
+  }
+}
