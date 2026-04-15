@@ -1,4 +1,4 @@
-# Flamework Multiplace Template
+# Flamework Multiplace Template [2.0]
 
 A Roblox TypeScript starter for building a real multiplace game. Ships with shared player data, delta replication, a pauseable clock system, and Lapis DataStore persistence.
 
