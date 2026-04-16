@@ -2,7 +2,7 @@ import { buildDataKey, dataAtom } from '@common/shared';
 import type { OnStart } from '@flamework/core';
 import { Controller } from '@flamework/core';
 import { computed, effect } from '@rbxts/charm';
-import { Players } from '@rbxts/services';
+import { Players, RunService } from '@rbxts/services';
 
 /**
  * Demonstrates client-side data replication.
@@ -11,6 +11,9 @@ import { Players } from '@rbxts/services';
 @Controller({})
 export class DataTestController implements OnStart {
   public onStart(): void {
+    if (!RunService.IsStudio()) {
+      return;
+    }
     const key = buildDataKey(Players.LocalPlayer.UserId);
     const selectData = computed(() => dataAtom()[key]);
 

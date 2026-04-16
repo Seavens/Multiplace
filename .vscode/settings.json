@@ -15,7 +15,9 @@
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
 	"cSpell.words": [
+		"Accum",
 		"multiplace",
+		"preflush",
 		"Teleporting"
 	]
 }

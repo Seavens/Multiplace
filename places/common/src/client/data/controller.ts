@@ -1,4 +1,4 @@
-import { DataManager, DataReplica, normalizeData, parseDataUserId } from '@common/shared';
+import { DataFlags, DataManager, DataReplica, parseDataUserId } from '@common/shared';
 import type { OnStart } from '@flamework/core';
 import { Controller } from '@flamework/core';
 import Squash from '@rbxts/squash';
@@ -26,13 +26,13 @@ export class DataController implements OnStart {
           continue;
         }
 
-        if (delta.cleanup) {
+        if ((delta.flags & DataFlags.Cleanup) !== 0) {
           DataManager.deleteData(userId);
           continue;
         }
 
         if (delta.data !== undefined) {
-          DataManager.setData(userId, normalizeData(delta.data));
+          DataManager.setData(userId, delta.data);
         }
       }
     });

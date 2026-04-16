@@ -7,7 +7,7 @@ import type { DataReplicationDelta } from './types';
 import { DataFlags } from './types';
 
 const serdesKey = Squash.string();
-const serdesFlags = Squash.uint(2);
+const serdesFlags = Squash.uint(1);
 const serdesPayload = Squash.opt(Squash.string());
 
 export class DataReplica {
@@ -39,7 +39,6 @@ export class DataReplica {
       key: this.key,
       flags,
       data,
-      spawn: (flags & DataFlags.Spawn) !== 0,
     };
   }
 
@@ -50,7 +49,6 @@ export class DataReplica {
       key: this.key,
       flags: DataFlags.Data | DataFlags.Spawn,
       data,
-      spawn: true,
     };
   }
 
@@ -61,7 +59,6 @@ export class DataReplica {
     return {
       key: this.key,
       flags: DataFlags.Cleanup,
-      cleanup: true,
     };
   }
 
@@ -84,8 +81,6 @@ export class DataReplica {
       key,
       flags,
       data: payload !== undefined ? (HttpService.JSONDecode(payload) as Data) : undefined,
-      spawn: (flags & DataFlags.Spawn) !== 0,
-      cleanup: (flags & DataFlags.Cleanup) !== 0,
     };
   }
 

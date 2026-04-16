@@ -49,6 +49,35 @@ export class DataStoreService implements OnStart {
     });
   }
 
+  /**
+   * Stamps accumulated session time and flushes the current atom state into the
+   * Lapis in-memory buffer. Call this for every player before initiating a
+   * TeleportService call so the final session data is as fresh as possible when
+   * the destination server steals the session lock.
+   *
+   * The session timer is reset to `now` rather than deleted, so any remaining
+   * time between this call and the eventual `unloadPlayer` is still captured.
+   */
+  public preflushPlayer(player: Player): void {
+    const id = player.UserId;
+    const sessionStart = this.sessionStarts.get(id);
+    if (sessionStart !== undefined) {
+      const now = os.time();
+      this.sessionStarts.set(id, now);
+      DataManager.updateData(id, (data) => {
+        data.player.totalPlayTime += now - sessionStart;
+      });
+    }
+
+    if (USE_MOCK_DATA) {
+      return;
+    }
+    const doc = this.docs.get(id);
+    if (doc) {
+      doc.write(DataManager.getData(id));
+    }
+  }
+
   private async loadPlayer(player: Player): Promise<void> {
     const id = player.UserId;
 

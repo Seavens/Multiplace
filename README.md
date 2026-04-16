@@ -107,7 +107,7 @@ The same delta pattern is used for player data and place state.
 server atom → Replica (diff) → Squash buffer → RemoteEvent → client atom
 ```
 
-A `Clock`-driven tick diffs the current atom against the last snapshot. Changed fields become a `DataReplicationDelta`, batched into one binary event per tick via Squash. The client controller deserializes and applies each delta.
+A dedicated `Clock`-driven tick diffs the current atom against the last snapshot. Changed fields become a `DataReplicationDelta`, batched into one binary event per tick via Squash. The client controller deserializes and applies each delta.
 
 On load, a full snapshot is sent immediately. The `hydratedPlayers` guard prevents duplicate snapshots. Clients can call `Functions.requestHydration` to re-request if they joined before data was ready.
 
@@ -178,7 +178,7 @@ Only add `server/` paths in server entry scripts and `client/` paths in client e
 
 ---
 
-Each place ships a `server/test/service.ts` and `client/test/controller.ts` that print state to the output window. Remove or gate them before shipping.
+Each place ships a `server/test/service.ts` and `client/test/controller.ts` that print state to the output window. Both are gated behind `RunService.IsStudio()` and are no-ops in production.
 
 ---
 

@@ -29,6 +29,9 @@ export class GameStateService implements OnStart {
 
   private awardCoins(): void {
     for (const player of Players.GetPlayers()) {
+      if (DataManager.getDataEntry(player.UserId) === undefined) {
+        continue;
+      }
       DataManager.updateData(player.UserId, (data) => {
         data.profile.coins += COIN_REWARD;
       });
